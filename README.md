@@ -1,5 +1,7 @@
 # Sistema de Gestión de Vehículos - Xtreme Performance 🚗🔧
 
+Este repositorio contiene un proyecto académico desarrollado como entrega IDL2 para la especialidad de Desarrollo de Sistemas de Información. El aplicativo simula un módulo básico de mantenimiento y registro de vehículos para la empresa **Xtreme Performance**, con el objetivo de demostrar la integración de una arquitectura Full-Stack y el manejo de bases de datos relacionales.
+
 ## 💻 Tecnologías Utilizadas
 
 **Frontend:**
@@ -36,7 +38,7 @@
 ### Configuración del Backend (.NET API)
 
 1. Abrir la solución en Visual Studio 2022.
-2. Navegar al archivo `appsettings.json` dentro del proyecto principal (`01 API`) y verificar que la cadena de conexión (`ConnectionString`) apunte correctamente a la base de datos MySQL.
+2. Navegar al archivo `appsettings.json` y `appsettings.Development.json` dentro del proyecto principal (`01 API`) y verificar que la cadena de conexión (`ConnectionString`) apunte correctamente a la base de datos MySQL.
 3. Ejecutar el proyecto (F5 o botón de Depurar). La API se levantará escuchando peticiones en puertos locales (ej. `https://localhost:7000`).
 
 ### Configuración del Frontend (Angular)
