@@ -1,9 +1,5 @@
 # Sistema de Gestión de Vehículos - Xtreme Performance 🚗🔧
 
-Este repositorio contiene el código fuente para el módulo de mantenimiento de vehículos, formando parte del proyecto: **"Implementación de un sistema multiplataforma para ordenes de servicio de la empresa Xtreme Performance, Huancayo - 2026"**.
-
-Es una aplicación Full-Stack orientada a optimizar el registro, control y administración de los vehículos que ingresan al taller.
-
 ## 💻 Tecnologías Utilizadas
 
 **Frontend:**
