@@ -1,0 +1,108 @@
+<div class="container py-3">
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="h5 mb-3">Filtros de búsqueda</h2>
+
+      <form class="row g-3" aria-label="Filtros de búsqueda de vehículos">
+        <div class="col-12 col-md-6">
+          <label for="filtroPlaca" class="form-label">Placa</label>
+          <input
+            id="filtroPlaca"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese placa"
+            [(ngModel)]="filtroPlaca"
+            name="filtroPlaca"
+          />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label for="filtroModelo" class="form-label">Modelo</label>
+          <input
+            id="filtroModelo"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese modelo"
+            [(ngModel)]="filtroModelo"
+            name="filtroModelo"
+          />
+        </div>
+
+        <div class="col-12 d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="limpiarFiltros()">
+            Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body table-wrapper">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Placa</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Color</th>
+              <th scope="col">Año</th>
+              <th scope="col">
+                <button type="button" class="btn btn-primary" (click)="abrirAgregar()">
+                  Agregar
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (auto of autos(); track auto.id) {
+              <tr>
+                <td>{{ auto.id }}</td>
+                <td>{{ auto.placa }}</td>
+                <td>{{ auto.modelo }}</td>
+                <td>{{ auto.color }}</td>
+                <td>{{ auto.anio }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-warning me-2"
+                    (click)="abrirEditar(auto)"
+                  >
+                    Editar
+                  </button>
+                  <button type="button" class="btn btn-sm btn-danger" (click)="eliminarAuto(auto)">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="text-center">No hay vehículos registrados.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  @if (mostrarModal) {
+    <div class="modal-backdrop-custom" (click)="cerrarModal()"></div>
+    <div
+      class="modal-custom"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Ventana de edición de vehículo"
+    >
+      <app-mantenimiento-auto-editar
+        [auto]="autoSeleccionado"
+        [marcas]="marcas"
+        [modo]="modoEdicion"
+        (cancelado)="cerrarModal()"
+        (guardado)="onGuardado()"
+      />
+    </div>
+  }
+</div>
