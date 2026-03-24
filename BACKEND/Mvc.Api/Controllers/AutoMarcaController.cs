@@ -3,11 +3,12 @@ using Mvc.Api.DbModel;
 using Mvc.Bussnies;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Mvc.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AutoMarcaController : ControllerBase
     {
         private readonly IAutoMarcaBussnies _autoMarcaBussnies;

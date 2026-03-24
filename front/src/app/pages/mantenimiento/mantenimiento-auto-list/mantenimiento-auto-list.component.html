@@ -29,6 +29,9 @@
         </div>
 
         <div class="col-12 d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-primary" (click)="abrirAgregar()">
+            Agregar vehículo
+          </button>
           <button type="button" class="btn btn-primary" (click)="buscar()">Buscar</button>
           <button type="button" class="btn btn-outline-secondary" (click)="limpiarFiltros()">
             Limpiar
@@ -49,11 +52,9 @@
               <th scope="col">Modelo</th>
               <th scope="col">Color</th>
               <th scope="col">Año</th>
-              <th scope="col">
-                <button type="button" class="btn btn-primary" (click)="abrirAgregar()">
-                  Agregar
-                </button>
-              </th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Combustible</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -64,6 +65,10 @@
                 <td>{{ auto.modelo }}</td>
                 <td>{{ auto.color }}</td>
                 <td>{{ auto.anio }}</td>
+
+                <td>{{ getNombreTipo(auto.IdTipo) }}</td>
+                <td>{{ getNombreCombustible(auto.IdCombustible) }}</td>
+
                 <td>
                   <button
                     type="button"
@@ -79,7 +84,7 @@
               </tr>
             } @empty {
               <tr>
-                <td colspan="6" class="text-center">No hay vehículos registrados.</td>
+                <td colspan="8" class="text-center">No hay vehículos registrados.</td>
               </tr>
             }
           </tbody>

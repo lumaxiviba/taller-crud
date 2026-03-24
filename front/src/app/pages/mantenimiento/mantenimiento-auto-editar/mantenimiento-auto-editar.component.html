@@ -16,6 +16,30 @@
     </div>
 
     <div class="mb-3">
+      <label class="form-label fw-bold">Tipo de Auto</label>
+      <select class="form-select" [(ngModel)]="autoForm.IdTipo" name="id_tipo_auto" required>
+        <option value="0" disabled>Seleccione un tipo...</option>
+        @for (tipo of listaTipos; track tipo.id) {
+          <option [value]="tipo.id">{{ tipo.descripcion }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Combustible</label>
+      <select
+        class="form-select"
+        [(ngModel)]="autoForm.IdCombustible"
+        name="id_combustible"
+        required
+      >
+        <option value="0" disabled>Seleccione un combustible...</option>
+        @for (combu of listaCombustibles; track combu.id) {
+          <option [value]="combu.id">{{ combu.descripcion }}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-3">
       <label class="form-label fw-bold">Placa</label>
       <input
         type="text"

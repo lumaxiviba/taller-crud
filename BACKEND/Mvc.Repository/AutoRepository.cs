@@ -44,6 +44,12 @@ namespace Mvc.Repository
             autoExistente.Modelo = auto.Modelo;
             autoExistente.Color = auto.Color;
             autoExistente.Anio = auto.Anio;
+
+            // --- ESTO ES LO QUE FALTABA PARA QUE SE GUARDE ---
+            autoExistente.IdTipo = auto.IdTipo;
+            autoExistente.IdCombustible = auto.IdCombustible;
+            // ------------------------------------------------
+
             autoExistente.UserUpdate = auto.UserUpdate;
             autoExistente.DateUpdate = DateTime.Now;
 
@@ -51,7 +57,6 @@ namespace Mvc.Repository
             var result = await _context.SaveChangesAsync();
             return result > 0;
         }
-
         public async Task<bool> DeleteAuto(int id)
         {
             var auto = await _context.Auto.FirstOrDefaultAsync(a => a.Id == id);

@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AutoService } from '../../../services/auto.service';
 import { AutoMarcaService } from '../../../services/auto-marca.service';
@@ -16,10 +23,15 @@ import { MantenimientoAutoEditarComponent } from '../mantenimiento-auto-editar/m
 export class MantenimientoAutoListComponent implements OnInit {
   _autoService = inject(AutoService);
   _autoMarcaService = inject(AutoMarcaService);
+  private cdr = inject(ChangeDetectorRef); // Agregamos el detector para el OnPush
 
   autos = signal<Auto[]>([]);
   autosOriginales: Auto[] = [];
   marcas: AutoMarca[] = [];
+
+  // Variables para nuestras nuevas listas
+  listaTipos: any[] = [];
+  listaCombustibles: any[] = [];
 
   mostrarModal = false;
   modoEdicion: 'crear' | 'editar' = 'crear';
@@ -31,8 +43,38 @@ export class MantenimientoAutoListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.cargarListasExtras(); // Cargamos tipos y combustibles primero
     this.getAllAutos();
     this.getMarcas();
+  }
+
+  cargarListasExtras() {
+    this._autoService.getTipos().subscribe({
+      next: (data: any) => {
+        this.listaTipos = data;
+        this.cdr.markForCheck(); // Le avisamos al OnPush que hay datos nuevos
+      },
+      error: (err: any) => console.log('Error tipos', err),
+    });
+
+    this._autoService.getCombustibles().subscribe({
+      next: (data: any) => {
+        this.listaCombustibles = data;
+        this.cdr.markForCheck(); // Le avisamos al OnPush que hay datos nuevos
+      },
+      error: (err: any) => console.log('Error combustibles', err),
+    });
+  }
+
+  // Funciones Traductoras
+  getNombreTipo(id: number): string {
+    const tipo = this.listaTipos.find((t) => t.id === id);
+    return tipo ? tipo.descripcion : 'Desconocido';
+  }
+
+  getNombreCombustible(id: number): string {
+    const combu = this.listaCombustibles.find((c) => c.id === id);
+    return combu ? combu.descripcion : 'Desconocido';
   }
 
   getMarcas() {

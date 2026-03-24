@@ -31,4 +31,11 @@ export class AutoService {
   deleteAuto(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
+  getTipos(): Observable<any> {
+    return this.http.get('https://localhost:7000/api/AutoTipo');
+  }
+
+  getCombustibles(): Observable<any> {
+    return this.http.get('https://localhost:7000/api/AutoCombustible');
+  }
 }

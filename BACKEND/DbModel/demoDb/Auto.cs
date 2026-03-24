@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text.Json.Serialization;
 namespace Mvc.Api.DbModel
 {
     [Table("auto")]
@@ -13,6 +13,14 @@ namespace Mvc.Api.DbModel
 
         [Column("id_marca")]
         public int IdMarca { get; set; }
+
+        [Column("IdTipo")]
+        [JsonPropertyName("IdTipo")] 
+        public int IdTipo { get; set; }
+
+        [Column("IdCombustible")]
+        [JsonPropertyName("IdCombustible")]
+        public int IdCombustible { get; set; }
 
         [Column("placa")]
         public string Placa { get; set; }
@@ -26,7 +34,6 @@ namespace Mvc.Api.DbModel
         [Column("anio")]
         public int Anio { get; set; }
 
-        /* CAMPOS DE AUDITORÍA */
         [Column("user_create")]
         public int UserCreate { get; set; }
 

@@ -1,0 +1,53 @@
+<div
+  class="container d-flex justify-content-center align-items-center"
+  style="min-height: 100vh; background-color: #f8f9fa"
+>
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 15px">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">Xtreme Performance</h2>
+      <p class="text-muted">Ingresa tus credenciales para continuar</p>
+    </div>
+
+    @if (mensajeError) {
+      <div class="alert alert-danger text-center" role="alert">
+        {{ mensajeError }}
+      </div>
+    }
+
+    <form (ngSubmit)="iniciarSesion()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label for="username" class="form-label fw-bold">Usuario</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          name="username"
+          [(ngModel)]="credenciales.username"
+          required
+          placeholder="Ej: admin"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="form-label fw-bold">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="credenciales.password"
+          required
+          placeholder="******"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100 fw-bold py-2"
+        [disabled]="loginForm.invalid || cargando"
+      >
+        {{ cargando ? 'Verificando...' : 'Iniciar Sesión' }}
+      </button>
+    </form>
+  </div>
+</div>

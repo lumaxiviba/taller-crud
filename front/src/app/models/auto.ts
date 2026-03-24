@@ -5,4 +5,6 @@ export interface Auto {
   modelo: string;
   color: string;
   anio: number;
+  IdTipo: number;
+  IdCombustible: number;
 }

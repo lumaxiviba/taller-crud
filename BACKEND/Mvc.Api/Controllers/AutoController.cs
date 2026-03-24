@@ -3,11 +3,12 @@ using Mvc.Api.DbModel;
 using Mvc.Bussnies; 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 namespace Mvc.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AutoController : ControllerBase
     {
         private readonly IAutoBussnies _autoBussnies;
@@ -51,5 +52,14 @@ namespace Mvc.Api.Controllers
         {
             return await _autoBussnies.DeleteAuto(id);
         }
-    }
-}
+
+        // GET: api/Auto/forzar-error
+        [HttpGet("forzar-error")]
+        [AllowAnonymous] 
+        public IActionResult ForzarError()
+        {
+            throw new Exception("¡Este es un error de prueba para la rúbrica IDL-3!");
+        }
+
+    } 
+} 
