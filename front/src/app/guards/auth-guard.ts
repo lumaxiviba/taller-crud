@@ -6,11 +6,9 @@ export const authGuard: CanActivateFn = (route, state) => {
   const _authService = inject(AuthService);
   const router = inject(Router);
 
-  // Le preguntamos al servicio si el usuario tiene un token guardado
   if (_authService.isLoggedIn()) {
-    return true; // ¡Tiene pase VIP, déjalo entrar!
+    return true; 
   } else {
-    // Si no tiene token, lo mandamos directo a la pantalla de Login
     router.navigate(['/login']);
     return false;
   }

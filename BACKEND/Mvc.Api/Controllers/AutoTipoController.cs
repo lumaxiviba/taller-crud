@@ -21,7 +21,6 @@ namespace Mvc.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            // Traemos la lista completa de Tipos de Auto (Sedán, SUV, etc.)
             var tipos = await _context.AutoTipo.ToListAsync();
             return Ok(tipos);
         }

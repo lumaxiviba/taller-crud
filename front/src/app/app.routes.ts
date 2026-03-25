@@ -1,33 +1,34 @@
 import { Routes } from '@angular/router';
-import { MantenimientoAutoListComponent } from './pages/mantenimiento/mantenimiento-auto-list/mantenimiento-auto-list.component';
-import { MantenimientoAutoEditarComponent } from './pages/mantenimiento/mantenimiento-auto-editar/mantenimiento-auto-editar.component';
-
 import { authGuard } from './guards/auth-guard';
-import { LoginComponent } from './components/login/login';
 
 export const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () => import('./components/login/login').then(m => m.LoginComponent),
   },
-
   {
     path: '',
-    component: MantenimientoAutoListComponent,
-    canActivate: [authGuard], // <--- CANDADO
+    redirectTo: 'mantenimiento',
+    pathMatch: 'full',
   },
   {
-    path: 'mantenimiento/nuevo',
-    component: MantenimientoAutoEditarComponent,
-    canActivate: [authGuard], // <--- CANDADO
+    path: 'mantenimiento',
+    canActivate: [authGuard], 
+    children: [
+      {
+        path: '', 
+        loadComponent: () => import('./pages/mantenimiento/mantenimiento-auto-list/mantenimiento-auto-list.component').then(m => m.MantenimientoAutoListComponent),
+      },
+      {
+        path: 'nuevo',
+        loadComponent: () => import('./pages/mantenimiento/mantenimiento-auto-editar/mantenimiento-auto-editar.component').then(m => m.MantenimientoAutoEditarComponent),
+      },
+      {
+        path: 'editar/:id',
+        loadComponent: () => import('./pages/mantenimiento/mantenimiento-auto-editar/mantenimiento-auto-editar.component').then(m => m.MantenimientoAutoEditarComponent),
+      }
+    ]
   },
-  {
-    path: 'mantenimiento/editar/:id',
-    component: MantenimientoAutoEditarComponent,
-    canActivate: [authGuard], // <--- CANDADO
-  },
-
-  // Comodín: Si escriben una URL que no existe, los mandamos al Login
   {
     path: '**',
     redirectTo: 'login',

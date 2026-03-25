@@ -22,5 +22,8 @@ namespace Mvc.Api.DbModel
 
         [Column("fecha")]
         public DateTime Fecha { get; set; }
+
+        [Column("payload")]
+        public string? Payload { get; set; } 
     }
 }

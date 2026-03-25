@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Mvc.Api.DbModel; 
-using Mvc.Bussnies; 
+using Mvc.Api.DbModel;
+using Mvc.Bussnies;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System; 
+
 namespace Mvc.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +38,8 @@ namespace Mvc.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] Auto auto)
         {
-            return await _autoBussnies.InsertAuto(auto);
+            throw new Exception("Error forzado al intentar guardar un vehículo. Demostración de captura de Payload para IDL-3.");
+
         }
 
         // PUT: api/Auto
@@ -55,11 +58,10 @@ namespace Mvc.Api.Controllers
 
         // GET: api/Auto/forzar-error
         [HttpGet("forzar-error")]
-        [AllowAnonymous] 
+        [AllowAnonymous]
         public IActionResult ForzarError()
         {
             throw new Exception("¡Este es un error de prueba para la rúbrica IDL-3!");
         }
-
-    } 
-} 
+    }
+}

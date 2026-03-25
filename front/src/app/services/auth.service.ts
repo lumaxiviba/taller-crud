@@ -8,6 +8,7 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = 'https://localhost:7000/api/Auth/login';
+  private readonly TOKEN_KEY = 'xtreme_token';
 
   constructor() {}
 
@@ -15,23 +16,20 @@ export class AuthService {
     return this.http.post(this.apiUrl, credenciales).pipe(
       tap((respuesta: any) => {
         if (respuesta && respuesta.token) {
-          localStorage.setItem('xtreme_token', respuesta.token);
+          localStorage.setItem(this.TOKEN_KEY, respuesta.token);
         }
       }),
     );
   }
 
-  // Método para cerrar sesión (borra el token)
   logout(): void {
-    localStorage.removeItem('xtreme_token');
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 
-  // Método para obtener el token guardado (lo usará el interceptor)
   getToken(): string | null {
-    return localStorage.getItem('xtreme_token');
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  // Método para saber si hay alguien logueado (lo usará el Guard)
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }

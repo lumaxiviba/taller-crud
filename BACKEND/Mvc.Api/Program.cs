@@ -48,7 +48,6 @@ builder.Services.AddScoped<IAutoBussnies, AutoBussnies>();
 builder.Services.AddScoped<IAutoMarcaBussnies, AutoMarcaBussnies>();
 
 builder.Services.AddControllers();
-//builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -58,8 +57,7 @@ app.UseCors("PermitirAngular");
 app.UseMiddleware<ErrorMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseSwagger();
-//app.UseSwaggerUI();
+
 
 app.MapControllers();
 app.Run();

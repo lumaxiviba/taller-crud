@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login',
   imports: [FormsModule],
   templateUrl: './login.html',
+  
 })
 export class LoginComponent {
   credenciales = {
@@ -26,11 +27,10 @@ export class LoginComponent {
 
     this._authService.login(this.credenciales).subscribe({
       next: (respuesta) => {
-        this.router.navigate(['/']); // Cambia esta ruta si tu tabla de autos está en otra URL
+        this.router.navigate(['/']); 
         this.cargando = false;
       },
       error: (err) => {
-        // Si las credenciales están mal, mostramos error
         this.mensajeError = 'Usuario o contraseña incorrectos.';
         this.cargando = false;
         console.log('Error en login:', err);

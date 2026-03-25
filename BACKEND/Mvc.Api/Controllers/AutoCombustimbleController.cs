@@ -20,7 +20,6 @@ namespace Mvc.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            // Traemos la lista completa de Combustibles (Gasolina, Diésel, etc.)
             var combustibles = await _context.AutoCombustible.ToListAsync();
             return Ok(combustibles);
         }
